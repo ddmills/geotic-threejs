@@ -15,10 +15,10 @@ export default class MeshComponent extends Component
     super('mesh');
 
     this.geometry = new BoxBufferGeometry(200, 200, 200);
-    let material = new MeshLambertMaterial({
+    this.material = new MeshLambertMaterial({
       color: 0xCC0000
     });
 
-    this.mesh = new Mesh(this.geometry, material);
+    this.mesh = new Mesh(this.geometry, this.material);
   }
 }

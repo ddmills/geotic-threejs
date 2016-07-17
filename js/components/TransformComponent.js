@@ -10,8 +10,8 @@ export default class TransformComponent extends Component
   {
     super('transform');
 
-    this.rotation = new Vector3(0.02, 0.05, 0.01);
+    this.rotation = new Vector3(0, 0, 0);
     this.position = new Vector3(0, 0, 0);
-    this.scaling = new Vector3(1, 1, 1);
+    this.scale = new Vector3(1, 1, 1);
   }
 }

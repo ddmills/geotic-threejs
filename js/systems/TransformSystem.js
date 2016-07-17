@@ -12,29 +12,27 @@ export default class TransformSystem extends System
 
   update(world, time)
   {
-    let entities = world.getEntities('transform');
+    let entities = world.getEntities('transform', 'mesh');
 
     for (let [id, entity] of entities) {
-      let x = entity.transform.rotation.x * time / 100;
-      let y = entity.transform.rotation.y * time / 100;
-      let z = entity.transform.rotation.z * time / 100;
-      entity.mesh.geometry.rotateX(y);
-      entity.mesh.geometry.rotateY(y);
-      entity.mesh.geometry.rotateZ(y);
+      let mesh = entity.mesh.mesh;
+      let transform = entity.transform;
+
+      mesh.scale.x = transform.scale.x;
+      mesh.scale.y = transform.scale.y;
+      mesh.scale.z = transform.scale.z;
+
+      mesh.rotation.x = transform.rotation.x;
+      mesh.rotation.y = transform.rotation.y;
+      mesh.rotation.z = transform.rotation.z;
+
+      mesh.position.x = transform.position.x;
+      mesh.position.y = transform.position.y;
+      mesh.position.z = transform.position.z;
     }
   }
 
   onAttach(world)
   {
-  //   let signature = world.getSignature('mesh');
-  //
-  //   signature.on('entity-added', (entity) => {
-  //     this.scene.add(entity.mesh.mesh);
-  //   });
-  //
-  //   world.getSignature('mesh').on('entity-removed', (entity) => {
-  //     console.log(`removed an entity with a mesh component... ${entity.id}`);
-  //   });
   }
-
 }

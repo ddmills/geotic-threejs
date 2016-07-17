@@ -65,7 +65,7 @@ export default class RenderSystem extends System
       this.scene.add(entity.mesh.mesh);
     });
 
-    world.getSignature('mesh').on('entity-removed', (entity) => {
+    signature.on('entity-removed', (entity) => {
       console.log(`removed an entity with a mesh component... ${entity.id}`);
     });
   }
