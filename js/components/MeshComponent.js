@@ -2,7 +2,7 @@
 
 import { Component } from 'geotic';
 import {
-  MeshBasicMaterial,
+  MeshLambertMaterial,
   BoxBufferGeometry,
   Mesh
 } from 'three';
@@ -14,7 +14,11 @@ export default class MeshComponent extends Component
   {
     super('mesh');
 
-    let geometry = new BoxBufferGeometry(200, 200, 200);
-    this.mesh = new Mesh(geometry);
+    this.geometry = new BoxBufferGeometry(200, 200, 200);
+    let material = new MeshLambertMaterial({
+      color: 0xCC0000
+    });
+
+    this.mesh = new Mesh(this.geometry, material);
   }
 }
