@@ -6,11 +6,8 @@ import ThreeJSComponent from './ThreeJSComponent';
 
 export default class AmbientLightComponent extends ThreeJSComponent
 {
-  constructor()
+  constructor(...args)
   {
-    super('ambientLight');
-
-    this.color = 0xffffff;
-    this.asset = new AmbientLight(this.color);
+    super('ambientLight', AmbientLight, args);
   }
 }

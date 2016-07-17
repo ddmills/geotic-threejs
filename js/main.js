@@ -4,6 +4,7 @@ import 'babel-polyfill';
 import * as Components from './components';
 import * as Systems from './systems';
 import { World, Entity } from 'geotic';
+import { MeshLambertMaterial, BoxBufferGeometry } from 'three';
 import Game from './Game';
 
 
@@ -13,7 +14,10 @@ let id = () => ++_id;
 let world = new World();
 let box = new Entity(id());
 
-box.addComponent(new Components.MeshComponent());
+
+let geom = new BoxBufferGeometry(200, 200, 200);
+let mat = new MeshLambertMaterial({ color: 0xCC0000 });
+box.addComponent(new Components.MeshComponent(geom, mat));
 box.addComponent(new Components.TransformComponent());
 box.addComponent(new Components.VelocityComponent());
 box.addComponent(new Components.PointLightComponent());

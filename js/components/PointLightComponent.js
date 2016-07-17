@@ -7,11 +7,8 @@ import ThreeJSComponent from './ThreeJSComponent';
 
 export default class PointLightComponent extends ThreeJSComponent
 {
-  constructor()
+  constructor(...args)
   {
-    super('pointLight');
-
-    this.color = 0xffffff;
-    this.asset = new PointLight(this.color);
+    super('pointLight', PointLight, args);
   }
 }

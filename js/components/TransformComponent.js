@@ -6,10 +6,9 @@ import { Object3D } from 'three';
 
 export default class TransformComponent extends ProxyComponent
 {
-  constructor()
+  constructor(...args)
   {
-    let object3d = new Object3D();
-    super('transform', object3d);
-    this.object3d = object3d;
+    super('transform', Object3D, args);
+    this.object3d = this.wrapped;
   }
 }

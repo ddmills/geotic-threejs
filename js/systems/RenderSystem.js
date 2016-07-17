@@ -54,15 +54,15 @@ export default class RenderSystem extends System
     let signature = world.getSignature('transform');
 
     for (let [id, entity] of signature.entities) {
-      this.scene.add(entity.transform.instance);
+      this.scene.add(entity.transform);
     }
 
     signature.on('entity-added', (entity) => {
-      this.scene.add(entity.transform.instance);
+      this.scene.add(entity.transform);
     });
 
     signature.on('entity-removed', (entity) => {
-      this.scene.remove(entity.transform.instance);
+      this.scene.remove(entity.transform);
     });
   }
 }

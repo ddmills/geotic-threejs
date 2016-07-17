@@ -6,11 +6,8 @@ import ThreeJSComponent from './ThreeJSComponent';
 
 export default class DirectionalLightComponent extends ThreeJSComponent
 {
-  constructor()
+  constructor(...args)
   {
-    super('directionalLight');
-
-    this.color = 0xffffff;
-    this.asset = new DirectionalLight(this.color);
+    super('directionalLight', DirectionalLight, args);
   }
 }

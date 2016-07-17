@@ -5,22 +5,28 @@ import { Component } from 'geotic';
 
 export default class ProxyComponent extends Component
 {
-  constructor(name, wrapped)
+  constructor(name, Wrapped, args)
   {
     super(name);
-    this.wrapped = wrapped;
 
-    return new Proxy(this, {
+    let self = this;
+    this.wrapped = new Wrapped(...args);
+    this.wrapped.name = this.name;
+    this.wrapped.original = this;
+
+    let proxy = {
       get: (target, key) => {
-        return key in target ? target[key] : target.wrapped[key];
+        return key in target ? target[key] : self[key];
       },
       set: (target, key, value) => {
-        key in target ? target[key] = value : target.wrapped[key] = value;
+        key in target ? target[key] = value : self[key] = value;
         return true;
       },
       apply: (target, ctx, args) => {
-        return Reflect.apply(...arguments)
+        return Reflect.apply(...args);
       }
-    });
+    };
+
+    return new Proxy(this.wrapped, proxy);
   }
 }

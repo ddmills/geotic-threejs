@@ -1,10 +1,11 @@
 'use strict';
 
 import { Component } from 'geotic';
+import ProxyComponent from './ProxyComponent';
 import TransformComponent from './TransformComponent';
 
 
-export default class ThreeJSComponent extends Component
+export default class ThreeJSComponent extends ProxyComponent
 {
   mount(entity)
   {
@@ -12,13 +13,11 @@ export default class ThreeJSComponent extends Component
       entity.addComponent(new TransformComponent());
     }
 
-    console.log(`add ${this.name} to ${entity.id}`);
-
-    entity.transform.add(this.asset);
+    entity.transform.add(this.wrapped);
   }
 
   unmount(entity)
   {
-    entity.transform.remove(this.asset);
+    entity.transform.remove(this.wrapped);
   }
 }
