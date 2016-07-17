@@ -14,11 +14,11 @@ export default class ThreeJSComponent extends Component
 
     console.log(`add ${this.name} to ${entity.id}`);
 
-    entity.transform.instance.add(this.asset);
+    entity.transform.add(this.asset);
   }
 
   unmount(entity)
   {
-    entity.transform.instance.remove(this.asset);
+    entity.transform.remove(this.asset);
   }
 }

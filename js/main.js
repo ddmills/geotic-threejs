@@ -21,7 +21,7 @@ box.addComponent(new Components.PointLightComponent());
 box.velocity.angular.z = 0.007;
 box.velocity.angular.y = -0.02;
 box.velocity.angular.y = 0.06;
-box.transform.instance.position.y = 25;
+box.transform.position.y = 25;
 
 let ambientLight = new Entity(id());
 ambientLight.addComponent(new Components.AmbientLightComponent());
