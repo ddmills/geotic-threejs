@@ -1,1 +1,0 @@
-# geotic-threejs
