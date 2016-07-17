@@ -1,6 +1,7 @@
 'use strict';
 
 import { Component } from 'geotic';
+import ThreeJSComponent from './ThreeJSComponent';
 import {
   MeshLambertMaterial,
   BoxBufferGeometry,
@@ -8,7 +9,7 @@ import {
 } from 'three';
 
 
-export default class MeshComponent extends Component
+export default class MeshComponent extends ThreeJSComponent
 {
   constructor()
   {
@@ -19,6 +20,6 @@ export default class MeshComponent extends Component
       color: 0xCC0000
     });
 
-    this.mesh = new Mesh(this.geometry, this.material);
+    this.asset = new Mesh(this.geometry, this.material);
   }
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 import { Component } from 'geotic';
-import { Vector3 } from 'three';
+import { Object3D } from 'three';
 
 
 export default class TransformComponent extends Component
@@ -9,9 +9,11 @@ export default class TransformComponent extends Component
   constructor()
   {
     super('transform');
+    this.instance = new Object3D();
+  }
 
-    this.rotation = new Vector3(0, 0, 0);
-    this.position = new Vector3(0, 0, 0);
-    this.scale = new Vector3(1, 1, 1);
+  render(scene)
+  {
+    scene.add(this.instance);
   }
 }

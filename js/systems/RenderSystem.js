@@ -7,11 +7,8 @@ import {
   WebGLRenderer,
   PerspectiveCamera,
   PointLight,
-  MeshLambertMaterial,
-  SphereGeometry,
-  BoxBufferGeometry,
-  CubeGeometry,
-  Mesh
+  AmbientLight,
+  DirectionalLight
 } from 'three';
 
 export default class RenderSystem extends System
@@ -30,11 +27,10 @@ export default class RenderSystem extends System
     this.camera.position.y = 160;
     this.camera.position.z = 400;
 
-    let lamp = new PointLight(0xFFFFFF);
-    lamp.position.set(0, 300, 200);
+    let lamp3 = new DirectionalLight(0xffffff, 0.8);
 
     this.scene.add(this.camera);
-    this.scene.add(lamp);
+    this.scene.add(lamp3);
     this.camera.lookAt(new Vector3(0, 0, 0));
 
     this.renderer = new WebGLRenderer();
@@ -59,15 +55,13 @@ export default class RenderSystem extends System
 
   onAttach(world)
   {
-    let signature = world.getSignature('mesh');
+    let signature = world.getSignature('transform');
 
     signature.on('entity-added', (entity) => {
-      this.scene.add(entity.mesh.mesh);
+      this.scene.add(entity.transform.instance);
     });
 
     signature.on('entity-removed', (entity) => {
-      console.log(`removed an entity with a mesh component... ${entity.id}`);
     });
   }
-
 }
