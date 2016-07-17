@@ -1,5 +1,11 @@
 import 'babel-polyfill'
-import three from 'three';
-import { MeshComponent } from 'geotic';
+import { MeshComponent } from './components';
+import { RenderSystem } from './systems';
+import { World } from 'geotic';
+import Game from './Game';
 
-console.log(three);
+let world = new World();
+
+world.addSystem(new RenderSystem());
+
+Game.start(world);
