@@ -11,9 +11,4 @@ export default class TransformComponent extends Component
     super('transform');
     this.instance = new Object3D();
   }
-
-  render(scene)
-  {
-    scene.add(this.instance);
-  }
 }

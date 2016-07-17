@@ -5,10 +5,7 @@ import {
   Scene,
   Vector3,
   WebGLRenderer,
-  PerspectiveCamera,
-  PointLight,
-  AmbientLight,
-  DirectionalLight
+  PerspectiveCamera
 } from 'three';
 
 export default class RenderSystem extends System
@@ -27,10 +24,7 @@ export default class RenderSystem extends System
     this.camera.position.y = 160;
     this.camera.position.z = 400;
 
-    let lamp3 = new DirectionalLight(0xffffff, 0.8);
-
     this.scene.add(this.camera);
-    this.scene.add(lamp3);
     this.camera.lookAt(new Vector3(0, 0, 0));
 
     this.renderer = new WebGLRenderer();
@@ -48,6 +42,8 @@ export default class RenderSystem extends System
 
   onWindowResize()
   {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
     this.camera.aspect = this.width / this.height;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(this.width, this.height);
@@ -57,11 +53,16 @@ export default class RenderSystem extends System
   {
     let signature = world.getSignature('transform');
 
+    for (let [id, entity] of signature.entities) {
+      this.scene.add(entity.transform.instance);
+    }
+
     signature.on('entity-added', (entity) => {
       this.scene.add(entity.transform.instance);
     });
 
     signature.on('entity-removed', (entity) => {
+      this.scene.remove(entity.transform.instance);
     });
   }
 }
