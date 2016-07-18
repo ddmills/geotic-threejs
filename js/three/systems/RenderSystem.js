@@ -1,12 +1,7 @@
 'use strict';
 
 import { System } from 'geotic';
-import {
-  Scene,
-  Vector3,
-  WebGLRenderer,
-  PerspectiveCamera
-} from 'three';
+import { Scene, WebGLRenderer } from 'three';
 
 export default class RenderSystem extends System
 {
@@ -18,14 +13,6 @@ export default class RenderSystem extends System
     this.height = window.innerHeight;
 
     this.scene = new Scene();
-    this.camera = new PerspectiveCamera(45, (this.width / this.height), 0.1, 10000);
-
-    this.camera.position.z = 0;
-    this.camera.position.y = 160;
-    this.camera.position.z = 400;
-
-    this.scene.add(this.camera);
-    this.camera.lookAt(new Vector3(0, 0, 0));
 
     this.renderer = new WebGLRenderer();
     this.renderer.setPixelRatio(window.devicePixelRatio);
@@ -37,21 +24,30 @@ export default class RenderSystem extends System
 
   update(world, time)
   {
-    this.renderer.render(this.scene, this.camera);
+    if (this.camera) {
+      this.renderer.render(this.scene, this.camera);
+    }
   }
 
   onWindowResize()
   {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
-    this.camera.aspect = this.width / this.height;
-    this.camera.updateProjectionMatrix();
     this.renderer.setSize(this.width, this.height);
   }
 
   onAttach(world)
   {
     let signature = world.getSignature('transform');
+
+    let cameraEntities = world.getTagged('playerCamera');
+
+    for (let [id, entity] of cameraEntities) {
+      let camera = entity.getComponentsWithTag('playerCamera')[0];
+      if (camera) {
+        this.camera = camera;
+      }
+    }
 
     for (let [id, entity] of signature.entities) {
       this.scene.add(entity.transform);
