@@ -2,15 +2,15 @@
 
 import { Component } from 'geotic';
 import ProxyComponent from './ProxyComponent';
-import TransformComponent from './TransformComponent';
+import Transform from './Transform';
 
 
-export default class ThreeJSComponent extends ProxyComponent
+export default class ThreeJSObject extends ProxyComponent
 {
   mount(entity)
   {
     if (entity.transform == undefined) {
-      entity.addComponent(new TransformComponent());
+      entity.addComponent(new Transform());
     }
 
     entity.transform.add(this.wrapped);

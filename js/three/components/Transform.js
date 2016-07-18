@@ -4,7 +4,7 @@ import ProxyComponent from './ProxyComponent';
 import { Object3D } from 'three';
 
 
-export default class TransformComponent extends ProxyComponent
+export default class Transform extends ProxyComponent
 {
   constructor(...args)
   {

@@ -4,7 +4,7 @@ import { Component } from 'geotic';
 import { Vector3 } from 'three';
 
 
-export default class VelocityComponent extends Component
+export default class Velocity extends Component
 {
   constructor()
   {
