@@ -1,3 +1,4 @@
-'use strict';
+import velocity from './velocity';
+import renderer from './renderer';
 
-export { default as VelocitySystem } from './VelocitySystem';
+export default { renderer, velocity };

@@ -1,15 +1,9 @@
-'use strict';
+import { component } from 'geotic';
 
-import { Component } from 'geotic';
-import { Vector3 } from 'three';
-
-
-export default class Velocity extends Component
-{
-  constructor()
-  {
-    super('velocity');
-    this.angular = new Vector3(0, 0, 0);
-    this.positional = new Vector3(0, 0, 0);
-  }
-}
+component('velocity', (entity, data = {}) => {
+  let angular = data.angular || { x: 0, y: 0, z: 0 };
+  let x = data.x || 0;
+  let y = data.y || 0;
+  let z = data.z || 0;
+  return { angular, x, y, z };
+});

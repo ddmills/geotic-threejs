@@ -1,48 +1,51 @@
-'use strict';
-
 import 'babel-polyfill';
-import * as Components from './components';
-import * as Systems from './systems';
-import * as gThree from './three';
-import PlayerCamera from './entities/PlayerCamera';
-import { World, Entity } from 'geotic';
-import { MeshLambertMaterial, BoxBufferGeometry } from 'three';
-import Game from './Game';
+import { entity, component } from 'geotic';
+import {
+  MeshLambertMaterial as material,
+  BoxBufferGeometry as cube,
+  PlaneGeometry as plane,
+  SphereGeometry as sphere
+} from 'three';
+import geotic from 'geotic';
+import game from './game';
+import systems from './systems';
+import './components';
 
+entity()
+  .add('transform', { position: { y: 20 } })
+  .add('mesh',
+    new sphere(50, 16, 16),
+    new material({ color: 0x8e98dd })
+  );
 
-let _id = 0;
-let id = () => ++_id;
+entity()
+  .add('transform', { position: { y: 20 } })
+  .add('ground');
 
-let world = new World();
-let box = new Entity(id());
+entity()
+  .add('transform')
+  .add('velocity', { x: .005 })
+  .add('mesh',
+    new cube(50, 50, 50),
+    new material({ color: 0xbb2253 })
+  );
 
-let geom = new BoxBufferGeometry(200, 200, 200);
-let mat = new MeshLambertMaterial({ color: 0xCC0000 });
-box.addComponent(new gThree.components.Mesh(geom, mat));
-box.addComponent(new gThree.components.Transform());
-box.addComponent(new gThree.components.PointLight());
-box.addComponent(new Components.Velocity());
+let rotatingLamp = entity()
+  .add('transform')
+  .add('light', { type: 'directional' })
+  .add('velocity', { angular: { x: 0, y: 0.005, z: 0 } });
 
+let player = entity()
+  .add('transform', { position: { z: 300 }})
+  .add('camera');
 
-box.velocity.angular.z = 0.007;
-box.velocity.angular.y = -0.02;
-box.velocity.angular.y = 0.06;
-box.transform.position.y = 170;
+entity()
+  .add('transform')
+  .add('light', { type: 'ambient', intensity: .7 })
 
-let ambientLight = new Entity(id());
-ambientLight.addComponent(new gThree.components.AmbientLight());
+rotatingLamp.c.light.position.z = 15;
 
-let directionalLight = new Entity(id());
-directionalLight.addComponent(new gThree.components.DirectionalLight());
-
-let playerCamera = PlayerCamera.create(id());
-world.addEntity(playerCamera);
-
-world.addSystem(new Systems.VelocitySystem());
-world.addSystem(new gThree.systems.RenderSystem());
-
-world.addEntity(box);
-world.addEntity(ambientLight);
-world.addEntity(directionalLight);
-
-Game.start(world);
+game.start((dt) => {
+  systems.renderer.update(dt);
+  systems.velocity.update(dt);
+});

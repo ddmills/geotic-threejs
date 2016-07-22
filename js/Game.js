@@ -1,16 +1,15 @@
-export default class Game
+export default class game
 {
-  static start(world)
+  static start(fn)
   {
-    let speed = .01
     let now = Date.now();
-    let loop = function() {
+    const speed = 1;
+    const loop = () => {
       requestAnimationFrame(loop);
-
-      let prev = now;
+      const prev = now;
       now = Date.now();
-
-      world.update((now - prev) * speed);
+      const dt = (now - prev) * speed;
+      fn(dt);
     }
 
     loop();
