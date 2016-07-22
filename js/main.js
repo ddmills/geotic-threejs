@@ -23,8 +23,8 @@ entity()
   .add('ground');
 
 entity()
-  .add('transform')
-  .add('velocity', { x: .005 })
+  .add('transform', { position: { x: -200, y: 25, z: 100 }})
+  .add('velocity', { x: .05, angular: {x: .002, y: 0, z: -.002}})
   .add('mesh',
     new cube(50, 50, 50),
     new material({ color: 0xbb2253 })
