@@ -37,6 +37,6 @@ component('light', (entity, data={}) => {
       break;
   }
 
-  entity.transform.add(light);
+  entity.mandate('transform').add(light);
   return light;
 });

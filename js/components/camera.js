@@ -4,7 +4,7 @@ import systems from '../systems';
 
 component('camera', entity => {
   let camera = new PerspectiveCamera(45, (window.innerWidth / window.innerHeight), 0.1, 10000);
-  entity.transform.add(camera);
+  entity.mandate('transform').add(camera);
   systems.renderer.camera = camera;
   return camera;
 });
