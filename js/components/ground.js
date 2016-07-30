@@ -10,6 +10,6 @@ component('ground', entity => {
   ground.rotation.x = -Math.PI/2;
   ground.position.y = -50;
   ground.doubleSided = true;
-  entity.c.transform.add(ground);
+  entity.transform.add(ground);
   return ground;
 });

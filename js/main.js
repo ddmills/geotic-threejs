@@ -43,7 +43,7 @@ entity()
   .add('transform')
   .add('light', { type: 'ambient', intensity: .7 })
 
-rotatingLamp.c.light.position.z = 15;
+rotatingLamp.light.position.z = 15;
 
 game.start((dt) => {
   systems.renderer.update(dt);

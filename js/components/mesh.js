@@ -3,6 +3,6 @@ import { component } from 'geotic';
 
 component('mesh', (entity, geometry, material) => {
   const mesh = new Mesh(geometry, material);
-  entity.c.transform.add(mesh);
+  entity.transform.add(mesh);
   return mesh;
 });
