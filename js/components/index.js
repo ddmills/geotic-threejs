@@ -1,4 +1,5 @@
 export { default as velocity } from './velocity';
+export { default as controls } from './controls';
 export { default as transform } from './transform';
 export { default as light } from './light';
 export { default as mesh } from './mesh';
