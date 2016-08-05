@@ -12,17 +12,17 @@ import systems from './systems';
 import './components';
 
 const orb = entity()
-  .add('obstacle', new box(1, 1, 1))
   .add('mesh',
     new sphere(50, 16, 16),
     new material({ color: 0x8e98dd })
-  );
+  )
+  .add('obstacle', new box(50, 50, 50));
 
 const floor = entity().add('ground');
 
 entity()
-  .add('obstacle', new box(1, 1, 1))
   .add('transform', { position: { x: 200, y: 25, z: 100 }})
+  .add('obstacle', new box(50, 50, 50))
   .add('velocity', { x: .0025, angular: {x: -.001, y: 0, z: -.001}})
   .add('mesh',
     new box(50, 50, 50),

@@ -8,7 +8,7 @@ class Controls {
       e.velocity.z = 0;
 
       if (keyboard.w) {
-        e.velocity.z = -e.controls.speed;
+        e.velocity.z = e.controls.speed;
       }
 
       if (keyboard.a) {
@@ -16,7 +16,7 @@ class Controls {
       }
 
       if (keyboard.s) {
-        e.velocity.z = e.controls.speed;
+        e.velocity.z = -e.controls.speed;
       }
 
       if (keyboard.d) {
