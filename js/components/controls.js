@@ -1,7 +1,7 @@
 import { component } from 'geotic';
 
-component('controls', (entity, data = {}) => {
-  let speed = data.speed || .1;
+component('controls', (entity, config={}) => {
+  const controls = Object.assign({ speed: .25, rotation: 0.002 }, config);
   entity.mandate('velocity');
-  return { speed };
+  return controls;
 });

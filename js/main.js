@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import { entity, component } from 'geotic';
 import {
   MeshLambertMaterial as material,
-  BoxBufferGeometry as cube,
+  BoxBufferGeometry as box,
   PlaneGeometry as plane,
   SphereGeometry as sphere
 } from 'three';
@@ -12,6 +12,7 @@ import systems from './systems';
 import './components';
 
 const orb = entity()
+  .add('obstacle', new box(1, 1, 1))
   .add('mesh',
     new sphere(50, 16, 16),
     new material({ color: 0x8e98dd })
@@ -20,10 +21,11 @@ const orb = entity()
 const floor = entity().add('ground');
 
 entity()
+  .add('obstacle', new box(1, 1, 1))
   .add('transform', { position: { x: 200, y: 25, z: 100 }})
   .add('velocity', { x: .0025, angular: {x: -.001, y: 0, z: -.001}})
   .add('mesh',
-    new cube(50, 50, 50),
+    new box(50, 50, 50),
     new material({ color: 0xbb2253 })
   );
 
@@ -33,24 +35,30 @@ const rotatingLamp = entity()
 
 const player = entity()
   .add('controls')
+  .add('collision')
   .add('mesh',
-    new cube(50, 50, 50),
+    new box(50, 50, 50),
     new material({ color: 0xe7bcec })
   );
 
 const camera = entity().add('camera');
 
-entity().add('light', { type: 'ambient', intensity: .7 })
+entity().add('light', { type: 'ambient', intensity: .7 });
 
 player.transform.position.x = -200;
 player.transform.position.y = -5;
+
+camera.transform.position.z = 0;
+camera.transform.position.y = 600;
+camera.transform.rotation.x = -Math.PI/2;
+
 rotatingLamp.light.position.z = 15;
-camera.transform.position.z = 300;
 orb.transform.position.y = 20;
 floor.transform.position.y = 20;
 
-game.start((dt) => {
+game.start(dt => {
   systems.controls.update(dt);
-  systems.renderer.update(dt);
+  systems.collision.update(dt);
   systems.velocity.update(dt);
+  systems.renderer.update(dt);
 });
