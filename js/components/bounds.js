@@ -27,12 +27,6 @@ component('bounds', (entity, geometry=false) => {
     renderer.scene.add(helper);
   }
 
-  const recalculate = () => {
-    collisions = []
-    bounds.setFromObject(mesh);
-    helper.update();
-  }
-
   const compare = (other) => {
     if (other.bounds.bounds.intersectsBox(bounds)) {
       collisions.push(other);
@@ -44,5 +38,5 @@ component('bounds', (entity, geometry=false) => {
     return collisions.includes(other);
   }
 
-  return { bounds, mesh, recalculate, compare, intersects, collisions, debug };
+  return { bounds, mesh, compare, intersects, collisions, debug };
 });

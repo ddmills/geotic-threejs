@@ -1,3 +1,4 @@
+export { default as collision } from './collision';
 export { default as transform } from './transform';
 export { default as velocity } from './velocity';
 export { default as controls } from './controls';

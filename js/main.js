@@ -39,7 +39,8 @@ const player = entity()
     new box(25, 50, 50),
     new material({ color: 0xe7bcec })
   )
-  .add('bounds');
+  .add('bounds')
+  .add('collision');
 
 const camera = entity().add('camera');
 

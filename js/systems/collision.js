@@ -1,7 +1,11 @@
 import geotic from 'geotic';
-import { Raycaster } from 'three';
 
 export default {
   update: (dt) => {
+    geotic.findByComponent('bounds', 'velocity').forEach(e => {
+      e.bounds.collisions.forEach(other => {
+        if (e.transform.position.x, other.transform.position.x);
+      });
+    });
   }
 };

@@ -5,7 +5,8 @@ export default {
     const actors = geotic.findByComponent('bounds');
 
     actors.forEach(e => {
-      e.bounds.recalculate();
+      e.bounds.collisions = [];
+      e.bounds.bounds.setFromObject(e.bounds.mesh);
       e.bounds.debug();
     });
 
@@ -16,10 +17,6 @@ export default {
         const other = actors[j];
 
         left.bounds.compare(other);
-
-        if (left.bounds.intersects(other)) {
-          console.log('collision');
-        }
       }
     }
   }
