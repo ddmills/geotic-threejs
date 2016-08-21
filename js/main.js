@@ -12,22 +12,22 @@ import systems from './systems';
 import './components';
 
 const orb = entity()
+  .add('bounds', new box(100, 100, 100))
   .add('mesh',
     new sphere(50, 16, 16),
     new material({ color: 0x8e98dd })
-  )
-  .add('obstacle', new box(50, 50, 50));
+  );
 
 const floor = entity().add('ground');
 
 entity()
   .add('transform', { position: { x: 200, y: 25, z: 100 }})
-  .add('obstacle', new box(50, 50, 50))
-  .add('velocity', { x: .0025, angular: {x: -.001, y: 0, z: -.001}})
+  .add('velocity', { angular: {x: -.001, y: 0, z: -.001}})
   .add('mesh',
     new box(50, 50, 50),
     new material({ color: 0xbb2253 })
-  );
+  )
+  .add('bounds');
 
 const rotatingLamp = entity()
   .add('light', { type: 'directional' })
@@ -35,11 +35,11 @@ const rotatingLamp = entity()
 
 const player = entity()
   .add('controls')
-  .add('collision')
   .add('mesh',
-    new box(50, 50, 50),
+    new box(25, 50, 50),
     new material({ color: 0xe7bcec })
-  );
+  )
+  .add('bounds');
 
 const camera = entity().add('camera');
 
@@ -58,6 +58,7 @@ floor.transform.position.y = 20;
 
 game.start(dt => {
   systems.controls.update(dt);
+  systems.bounds.update(dt);
   systems.collision.update(dt);
   systems.velocity.update(dt);
   systems.renderer.update(dt);

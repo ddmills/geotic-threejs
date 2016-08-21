@@ -1,5 +1,6 @@
 import geotic from 'geotic';
 import keyboard from '../keyboard';
+import { Vector3, Quaternion } from 'three';
 
 class Controls {
   update(dt) {

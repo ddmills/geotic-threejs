@@ -9,6 +9,7 @@ export default {
       e.transform.rotateX(e.velocity.angular.x * dt);
       e.transform.rotateY(e.velocity.angular.y * dt);
       e.transform.rotateZ(e.velocity.angular.z * dt);
+      e.velocity.updateWorld(e.transform.rotation);
     });
   }
 };
